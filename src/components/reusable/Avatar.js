@@ -1,12 +1,22 @@
 import React from "react";
 
-export default function Avatar({ srcURL }) {
+export default function Avatar({ srcURL, size }) {
   const avtr = srcURL ? (
-    <img className="inline-block w-10 h-10 rounded-full" src={srcURL} alt="" />
+    <img
+      className={`inline-block w-${size ? size : "10"} h-${
+        size ? size : "10"
+      } rounded-full`}
+      src={srcURL}
+      alt=""
+    />
   ) : (
-    <span className="inline-block w-10 h-10 overflow-hidden bg-gray-100 rounded-full">
+    <span
+      className={`inline-block w-${size ? size : "10"} h-${
+        size ? size : "10"
+      } overflow-hidden bg-avatarBG rounded-full`}
+    >
       <svg
-        className="w-full h-full text-gray-300"
+        className="w-full h-full text-mainLight"
         fill="currentColor"
         viewBox="0 0 24 24"
       >

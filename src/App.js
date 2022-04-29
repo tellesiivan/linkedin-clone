@@ -1,4 +1,4 @@
-import BodyContainer from "./components/layout/Body/BodyContainer";
+import BodyContainer from "./components/layout/body/BodyContainer";
 import Header from "./components/layout/Header";
 
 function App() {
