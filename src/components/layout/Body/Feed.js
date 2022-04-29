@@ -1,5 +1,13 @@
-import React from "react";
+import CreatePost from "./feed/CreatePost";
+import Post from "./feed/Post";
 
 export default function Feed() {
-  return <div className="w-2/4 h-screen bg-mainLight">Feed</div>;
+  return (
+    <div className="flex-1">
+      <CreatePost />
+
+      {/* Posts  */}
+      <Post />
+    </div>
+  );
 }
