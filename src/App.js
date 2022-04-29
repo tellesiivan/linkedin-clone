@@ -1,16 +1,18 @@
 import BodyContainer from "./components/layout/body/BodyContainer";
+import Login from "./components/Login";
 import Header from "./components/layout/Header";
+import { selectUser } from "./store/userSlice";
+import { useSelector } from "react-redux";
 
 function App() {
-  return (
+  const user = useSelector(selectUser);
+
+  return !user ? (
+    <Login />
+  ) : (
     <>
-      {/* header */}
       <Header />
-      {/*Body */}
       <BodyContainer />
-      {/* Sidebar */}
-      {/* Feed */}
-      {/* widget */}
     </>
   );
 }

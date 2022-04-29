@@ -6,8 +6,33 @@ import {
   RiCalendarEventFill,
   RiNewspaperFill,
 } from "react-icons/ri";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { dbRef } from "../../../../firebase";
+import { useState } from "react";
 
 export default function CreatePost() {
+  const [value, setValue] = useState("");
+
+  function captureValue(e) {
+    setValue(e.target.value);
+  }
+
+  async function createNewPost(e) {
+    e.preventDefault();
+    if (value.trim() === "") return;
+
+    await addDoc(collection(dbRef, "posts"), {
+      user: {
+        name: "Wes",
+        title: "React Developer",
+      },
+      photoUrl: "",
+      postMessage: value,
+      timestamp: serverTimestamp(),
+    });
+    setValue("");
+  }
+
   return (
     <div className="p-4 rounded-lg bg-mainLight">
       <div className="flex items-center py-2.5 px-3 rounded-full bg-main">
@@ -17,8 +42,10 @@ export default function CreatePost() {
             type="text"
             className="flex-1 ml-3 text-sm text-gray-300 bg-transparent border-none outline-none"
             placeholder="Start a post..."
+            value={value}
+            onChange={captureValue}
           />
-          <button type="submit" className="hidden">
+          <button type="submit" className="hidden" onClick={createNewPost}>
             Post
           </button>
         </form>
