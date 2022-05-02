@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import Avatar from "../../../reusable/Avatar";
 import InputOption from "../../../reusable/InputOption";
 import {
@@ -8,12 +8,15 @@ import {
   RiSendPlaneLine,
 } from "react-icons/ri";
 
-export default function Post({ post }) {
+export default forwardRef(function Post({ post }, ref) {
   return (
-    <div className="px-4 pt-4 my-2 space-y-4 overflow-hidden rounded-lg bg-mainLight">
+    <div
+      className="px-4 pt-4 my-2 space-y-4 overflow-hidden rounded-lg bg-mainLight"
+      ref={ref}
+    >
       <div className="flex items-center ">
         {/* Content goes here */}
-        <Avatar />
+        <Avatar srcURL={post.photoUrl !== "" && post.photoUrl} />
         <div className="ml-3">
           <h3 className="text-sm font-medium text-white">{post.user.name}</h3>
           <p className="text-xs text-gray-400">{post.user.title}</p>
@@ -46,4 +49,4 @@ export default function Post({ post }) {
       </div>
     </div>
   );
-}
+});

@@ -6,6 +6,7 @@ module.exports = {
         linkedinBlue: "#0A66C2",
         main: "#011F26",
         mainLight: "#042830",
+        secondary: "#0f4250",
         avatarBG: "#3d6069",
       },
     },
