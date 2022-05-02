@@ -9,7 +9,7 @@ export default function BottomSidebar() {
   );
 
   return (
-    <div className="px-2 py-3 rounded-lg bg-mainLight">
+    <div className="sticky px-2 py-3 rounded-lg bg-mainLight top-20">
       <h2 className="mb-2 font-medium text-white">Trending</h2>
       <div className="space-y-1.5">
         {recentItem("reactjs")}

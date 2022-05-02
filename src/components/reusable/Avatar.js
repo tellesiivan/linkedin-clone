@@ -3,7 +3,7 @@ import React from "react";
 export default function Avatar({ srcURL, size }) {
   const avtr = srcURL ? (
     <img
-      className={`inline-block w-${size ? size : "10"} h-${
+      className={`inline-block object-cover w-${size ? size : "10"} h-${
         size ? size : "10"
       } rounded-full`}
       src={srcURL}

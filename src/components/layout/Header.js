@@ -7,17 +7,33 @@ import {
   RiMessage2Fill,
   RiNotification4Fill,
 } from "react-icons/ri";
-
+import { getAuth, signOut } from "firebase/auth";
+import { selectUser } from "../../store/userSlice";
+import { useSelector } from "react-redux";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/solid";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import HeaderOpt from "../reusable/HeaderOpt";
+import Avatar from "../reusable/Avatar";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Header() {
+  const user = useSelector(selectUser);
+
+  function signOutHandler() {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  }
+
   return (
     <Disclosure
       as="nav"
@@ -85,10 +101,9 @@ export default function Header() {
                     <div>
                       <Menu.Button className="flex text-sm text-white bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-main">
                         <span className="sr-only">Open user menu</span>
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
+                        <Avatar
+                          size="8"
+                          srcURL={user?.photoURL && user.photoURL}
                         />
                       </Menu.Button>
                     </div>
@@ -104,41 +119,39 @@ export default function Header() {
                       <Menu.Items className="absolute right-0 w-48 py-1 mt-2 origin-top-right rounded-md shadow-lg bg-mainLight ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <p
                               className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                active ? "bg-secondary" : "",
+                                "block px-4 py-2 text-sm text-gray-300 cursor-pointer"
                               )}
                             >
                               Your Profile
-                            </a>
+                            </p>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <p
                               className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                active ? "bg-secondary" : "",
+                                "block px-4 py-2 text-sm text-gray-300 cursor-pointer"
                               )}
                             >
                               Settings
-                            </a>
+                            </p>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <p
                               className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                active ? "bg-secondary" : "",
+                                "block px-4 py-2 text-sm text-gray-300 cursor-pointer"
                               )}
+                              onClick={() => signOutHandler()}
                             >
                               Sign out
-                            </a>
+                            </p>
                           )}
                         </Menu.Item>
                       </Menu.Items>

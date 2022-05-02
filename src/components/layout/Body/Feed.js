@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import CreatePost from "./feed/CreatePost";
 import Post from "./feed/Post";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-
 import { dbRef } from "../../../firebase";
+import FlipMove from "react-flip-move";
 
 export default function Feed() {
   const [posts, setPosts] = useState([]);
@@ -27,10 +27,11 @@ export default function Feed() {
       <CreatePost />
 
       {/* Posts  */}
-
-      {posts.map((post) => (
-        <Post key={post.id} post={post} />
-      ))}
+      <FlipMove>
+        {posts.map((post) => (
+          <Post key={post.id} post={post} />
+        ))}
+      </FlipMove>
     </div>
   );
 }
